@@ -13,13 +13,13 @@
 ---
 
 ## 📄 Documentación y Video
-* [cite_start]**Video Demostrativo:** [Insertar Link aquí] (Duración: 10-15 min) [cite: 112, 126]
-* [cite_start]**Informe Técnico (PDF):** [Enlace al PDF o ver archivo en la raíz] [cite: 127]
+* **Video Demostrativo:** [Insertar Link aquí] (Duración: 10-15 min)
+* **Informe Técnico (PDF):** [Enlace al PDF o ver archivo en la raíz]
 
 ---
 
 ## 🚀 Funcionalidades Principales
-[cite_start]El sistema ofrece un menú interactivo con las siguientes capacidades[cite: 55, 56]:
+El sistema ofrece un menú interactivo con las siguientes capacidades:
 
 1.  [cite_start]**Gestión de Datos:** Agregar nuevos países y actualizar población o superficie de registros existentes[cite: 57, 58].
 2.  [cite_start]**Búsqueda:** Localización de países por nombre (coincidencia exacta o parcial)[cite: 59].
