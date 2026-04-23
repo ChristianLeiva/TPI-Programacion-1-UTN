@@ -2,13 +2,13 @@
 ## Trabajo Práctico Integrador - Programación 1
 ### Tecnicatura Universitaria en Programación - UTN (Facultad Regional Chubut)
 
-[cite_start]Este proyecto consiste en una aplicación de consola desarrollada en Python que permite la gestión, filtrado y análisis estadístico de un dataset de países cargado desde un archivo CSV[cite: 11, 12]. [cite_start]El sistema aplica conceptos fundamentales de programación como estructuras de datos (listas y diccionarios), modularización y algoritmos de ordenamiento[cite: 13, 16].
+[cite_start]Este proyecto consiste en una aplicación de consola desarrollada en Python que permite la gestión, filtrado y análisis estadístico de un dataset de países cargado desde un archivo CSV. El sistema aplica conceptos fundamentales de programación como estructuras de datos (listas y diccionarios), modularización y algoritmos de ordenamiento.
 
 ---
 
 ## 👥 Integrantes
-* **Nombre Apellido** - [Enlace a Perfil de GitHub]
-* **Nombre Apellido** - [Enlace a Perfil de GitHub]
+* **Soledad Ortiz** - [Enlace a Perfil de GitHub]
+* **Chritian Nicolás Leiva** - [[Enlace a Perfil de GitHub](https://github.com/ChristianLeiva)]
 
 ---
 
