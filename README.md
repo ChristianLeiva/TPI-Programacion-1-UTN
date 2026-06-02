@@ -7,7 +7,7 @@
 ---
 
 ## 👥 Integrantes
-* **Soledad Ortiz** - [Enlace a Perfil de GitHub]
+* **Sol Ortiz** - [[Enlace a Perfil de GitHub].(https://github.com/SolOrtiz0708)]
 * **Chritian Nicolás Leiva** - [[Enlace a Perfil de GitHub](https://github.com/ChristianLeiva)]
 
 ---
