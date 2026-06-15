@@ -119,13 +119,208 @@ def agregar_pais(lista_paises):
     print(f"\n¡Éxito! '{nombre}' ha sido registrado correctamente.")
 
 def actualizar_datos(lista_paises):
-    pass
+    print("\n--- ACTUALIZACIÓN DE DATOS ---")
+    #Pedir al usuario el nombre del país a actualizar
+    país_actualizar= input("Ingrese el nombre del país a actualizar: ").strip()
+    
+    #Corroborar que el usuario no ingrese campos vacíos
+    if not país_actualizar:
+        print("Error: El nombre del país no puede estar vacío")
+        return
+    
+    #Buscar país
+    pais_encontrado= None
+    for p in lista_paises:
+        if país_actualizar.lower() == (p['nombre']).lower(): 
+            pais_encontrado = p
+            break
+    
+    if not pais_encontrado:
+        print(f"El nombre del país {país_actualizar} no está registrado")
+        return
+    
+    #Mostrar opciones
+    print("¿Qué datos desea actualizar?")
+    print("1. Actualizar población")
+    print("2.Actualizar superfice")
+    print("3.Actualzar población y superficie.")
+
+    #Pedir dato y corroborar que se ingresó sea el tipo de dato pedido 
+    try:
+        opcion= int(input("Ingrese la opción elegida: "))
+    except ValueError:
+        print("Error: debe ingresar un número")
+        return 
+    
+    #Se corrobora que la opción sea válida
+    if opcion not in [1,2,3]:
+        print("Error: Debe elegir una opción válida.") 
+        return
+    
+    #Si la opción ingresada es 1 o 3
+    if opcion == 1 or opcion == 3:
+        print("\n--- Actualización de población ---")
+        try:
+            poblacion_actualizar= int(input("Ingrese el número de población actualizado: "))    #Pide el ingreso del dato  
+            if poblacion_actualizar <= 0:                                                       #Verifica que sea mayor que 0
+                print("Error: La población no puede ser igual o menor que 0.")
+                return
+            pais_encontrado['poblacion'] = poblacion_actualizar                                 #Reemplazar el valor la población establecido en el cvs por el ingresado por el usuario
+            print(f"Se actualizó con éxito la población del país {país_actualizar}")
+        except ValueError:
+            print("Error: debe ingresa un número.")
+    #Si la opción es 2 o 3
+    if opcion == 2 or opcion == 3:
+        print("\n--- Actualización de superficie ---")
+
+        try:
+            superficie_actualizar= int(input("Ingrese la superficie actualizada: "))    #Pide el valor del dato a actualizar
+            if superficie_actualizar <= 0:                                              #Verifica que sea mayor que 0
+                print("Error: La superficie no puede ser igual o menor que 0.")
+                return
+
+            pais_encontrado['superficie'] = superficie_actualizar                       #Reemplaza el valor de superficie establecido en el cvs por el ingresado por el usuario
+            print(f"Se actualizó con éxito la superficie del país {país_actualizar}.")
+        except ValueError:
+            print("Error: debe ingresar un número.")
+            return
 
 def buscar_pais(lista_paises):
-    pass
+    #Crea la lista para guardar posibles oincidencias y pide el nombre del país a buscar
+    coincidencias_p= []
+    pais_buscar= input("Ingrese el nombre del país que desea buscar: ").strip()
+
+    #Verifica que el dato no esté vacío
+    if pais_buscar == "" :
+        print("Error: No puede ingresar nombres vacíos.")
+        return 
+
+    #Busca la coincidencia 
+    for p in lista_paises:
+        if pais_buscar.lower() == (p['nombre']).lower():    #Si la coincdencia es exacta imprime la información del país 
+            print(f"Información del país buscado: \n{p}")
+            return p
+        
+        if pais_buscar.lower() in (p['nombre']).lower():    #Si la coincidencia es parcial agrega el país a la lista de coincidencias
+            coincidencias_p.append(p)
+    
+    #Si hay elementos en la lista coincidencias_p, los imprime, de lo contrario envía un mensaje
+    if coincidencias_p:                                     
+        print(f"Se encontraron {len(coincidencias_p)} coincidencias parciales")
+        for c in coincidencias_p:
+            print(f"\n{c}")
+    else:
+        print("No se encontró ningún país con el nombre ingresado. Intente nuevamente.")
+
 
 def filtrar_paises(lista_paises):
-    pass
+    #Mostrar opciones
+    print("\n--- FILTRAR PAÍS POR CONTINENTE, RANGO DE POBLACIÓN O RANGO DE SUPERFICIE ---")
+    print("1_Continente")
+    print("2_Rango de población")
+    print("3_Rango de superficie")
+    
+    #Pedir ingreso de opción y validar que se ingrese el tipo de dato pedido
+    try:
+        opcion= int(input("Ingrese la opción deseada:"))
+    except ValueError:
+        print("Error: debe ingresar un número.")
+        return
+    
+    if opcion not in [1,2,3]:
+        print("Error: Solo puede ingresar los números: 1, 2 o 3. Intente nuevamente.")
+        return
+    
+    if opcion == 1:
+        print("\n--- Eligió la opción de filtrar por continente ---")
+        #Crea lista de continentes para agregar los países si se encuentran coincidencias
+        lista_continentes= []
+        f_continente= input("Ingrese el nombre del contienente: ").strip()
+        
+        #Corroborar el correcto ingreso del dato
+        if not f_continente:
+            print("Error: No puede ingresar un dato vacío. Intente nuevamente.")
+            return
+        
+        if f_continente.isdigit():
+            print("Error: No puede ingresar un número. Intente nuevamente.")
+            return
+        
+        #Buscar el país y si se encuentra agragarlo a la lista 
+        for p in lista_paises:
+            if f_continente.lower() == (p['continente']).lower():
+                lista_continentes.append(p)
+        
+        #Si la lista tiene elementos los imprime, de lo contrario devuelve un mensaje
+        if lista_continentes != []:
+            print(f"Paises filtrados por el continente de {f_continente}: {len(lista_continentes)} ")
+            for p in lista_continentes:
+                print(f"\n{p}")
+        else:
+            print(f"No se encontraron países en el continente {f_continente}")
+    
+        return lista_continentes
+        
+        
+
+    elif opcion == 2:
+        print("\n--- Eligió la opción de filtrar por rango de población ---")
+        #Crea la lista de rango de población para agregar los países que estén en el rango ingresado
+        lista_rango_poblacion= []
+
+        #Se piden los rangos y se verifica que se ingrese el tipo de dato pedido
+        try:
+            f_rango_i= int(input("Ingrese el número de inicio del rango: "))
+            f_rango_f= int(input("Ingrese el número de finalización del rango: "))
+        except ValueError:
+            print("Error: debe ingresar un número.")
+
+        #Se corrobora que los valores sean lógicos
+        if f_rango_i > f_rango_f:
+            print("Error: el rango inical no puede ser mayor que el rango final.")
+            return
+        
+        #Se busca la coincidencia de rangos y si se encuentra se agrega a la lista
+        for p in lista_paises:
+            if (p['poblacion']) >= f_rango_i and (p['poblacion']) <= f_rango_f:
+                lista_rango_poblacion.append(p)
+
+        #Si la lista tiene cargados elementos se los imprime, de lo contrario se envía un mensaje
+        if lista_rango_poblacion:
+            print(f"Se encontraron {len(lista_rango_poblacion)} países con el rango de población ingresado.")
+            for p in lista_rango_poblacion:
+                print(f"\n{p}")
+        else:
+            print("Error: El rango de población que ingresó no coincide con el de ningún país cargado.")
+        
+        return lista_rango_poblacion
+
+    else:
+        print("\n--- Eligió la opción de filtrar por rango de superficie ---")
+        #Crea una lista de rango de superficie para ingresar los países que estén en el rango ingresado
+        lista_rango_superficie= []
+
+        #Se piden los rangos y se verifica que se ingrese el tipo de dato pedido
+        try:
+            f_rango_i= int(input("Ingrese el número de inicio del rango: "))
+            f_rango_f= int(input("Ingrese el número de finalización del rango: "))
+            
+        except ValueError:
+            print("Error: debe ingresar un número.")
+        
+        #Se busca la coincidencia de rangos y si se encuentra se agrega a la lista
+        for p in lista_paises:
+            if (p['superficie']) >= f_rango_i and (p['superficie']) <= f_rango_f:
+                lista_rango_superficie.append(p)
+        
+        #Si la lista tiene cargados elementos se los imprime, de lo contrario se envía un mensaje
+        if lista_rango_superficie:
+            print(f"Se encontraron {len(lista_rango_superficie)} países con el rango de superficie ingresado.")
+            for p in lista_rango_superficie:
+                print(f"\n{p}")
+        else:
+            print("Error: El rango de superficie que ingresó no coincide con el de ningún país cargado.")
+        return lista_rango_superficie
 
 def ordenar_paises(lista_paises):    
     if not lista_paises:
