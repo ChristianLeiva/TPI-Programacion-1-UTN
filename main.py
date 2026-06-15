@@ -177,7 +177,36 @@ def ordenar_paises(lista_paises):
     mostrar_lista_paises(lista_paises)
 
 def mostrar_estadisticas(lista_paises):
-    pass
+    """Calcula y muestra estadísticas sobre la lista de países."""
+    if not lista_paises:
+        print("Aviso: No hay datos para calcular estadísticas.")
+        return
+
+    # 1. País con más y menos población
+    pais_mas_poblado = max(lista_paises, key=lambda x: x["poblacion"])
+    pais_menos_poblado = min(lista_paises, key=lambda x: x["poblacion"])
+
+    # 2. Promedio de superficie
+    total_superficie = sum(pais["superficie"] for pais in lista_paises)
+    promedio_superficie = total_superficie / len(lista_paises)
+
+    # 3. Conteo por continente
+    conteo_continentes = {}
+    for pais in lista_paises:
+        cont = pais["continente"]
+        if cont in conteo_continentes:
+            conteo_continentes[cont] += 1
+        else:
+            conteo_continentes[cont] = 1
+
+    # --- MUESTRA EN CONSOLA ---
+    print("\n--- ESTADÍSTICAS GLOBALES ---")
+    print(f"País más poblado: {pais_mas_poblado['nombre']} ({pais_mas_poblado['poblacion']} hab.)")
+    print(f"País menos poblado: {pais_menos_poblado['nombre']} ({pais_menos_poblado['poblacion']} hab.)")
+    print(f"Promedio de superficie: {promedio_superficie:,.2f} km²")
+    print("\nDistribución por continentes:")
+    for continente, cantidad in conteo_continentes.items():
+        print(f"- {continente}: {cantidad} país(es)")
 
 def mostrar_lista_paises(lista_paises):
     if not lista_paises:
