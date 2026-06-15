@@ -49,7 +49,8 @@ def mostrar_menu():
     print("4. Filtrar países")
     print("5. Ordenar países")
     print("6. Mostrar estadísticas globales")
-    print("7. Salir")
+    print("7. Mostrar lista de países")
+    print("8. Salir")
     print("========================================")
 
 
@@ -110,7 +111,11 @@ def agregar_pais(lista_paises):
         "continente": continente
     }
     
-    lista_paises.append(nuevo_pais)
+    with open(LISTA_PAISES, 'a', encoding='utf-8', newline='') as archivo:
+        campos = ["nombre", "poblacion", "superficie", "continente"]
+        escritor = csv.DictWriter(archivo, fieldnames=campos)       
+        escritor.writerow(nuevo_pais)
+        lista_paises.append(nuevo_pais)
     print(f"\n¡Éxito! '{nombre}' ha sido registrado correctamente.")
 
 def actualizar_datos(lista_paises):
@@ -122,13 +127,70 @@ def buscar_pais(lista_paises):
 def filtrar_paises(lista_paises):
     pass
 
-def ordenar_paises(lista_paises):
-    pass
+def ordenar_paises(lista_paises):    
+    if not lista_paises:
+        print("Aviso: No hay países cargados en el sistema para ordenar.")
+        return
+
+    print("\n--- ORDENAR PAÍSES ---")
+    print("1. Por Nombre (Alfabético)")
+    print("2. Por Población")
+    print("3. Por Superficie")
+    print("4. Por Continente")
+    print("5. Cancelar y volver al menú principal")
+    
+    opcion = input("Elija el criterio de ordenamiento (1-5): ").strip()
+    
+    if opcion == '5':
+        return
+        
+    if opcion not in ['1', '2', '3', '4']:
+        print("Error: Opción inválida.")
+        return
+
+    # Preguntamos el sentido del ordenamiento
+    sentido = input("¿Desea ordenarlo de forma Ascendente (A) o Descendente (D)? ").strip().upper()
+    while sentido not in ['A', 'D']:
+        print("Error: Ingrese 'A' para Ascendente o 'D' para Descendente.")
+        sentido = input("¿Desea ordenarlo de forma Ascendente (A) o Descendente (D)? ").strip().upper()
+        
+    # Si elige D, reverse será True. Si elige A, reverse será False.
+    es_descendente = (sentido == 'D')
+
+    # Aplicamos el sort con lambda dependiendo de la opción
+    if opcion == '1':
+        # x representa a cada diccionario (país) de la lista. x["nombre"] saca el valor de esa clave.
+        lista_paises.sort(key=lambda x: x["nombre"], reverse=es_descendente)
+        criterio = "Nombre"
+    elif opcion == '2':
+        lista_paises.sort(key=lambda x: x["poblacion"], reverse=es_descendente)
+        criterio = "Población"
+    elif opcion == '3':
+        lista_paises.sort(key=lambda x: x["superficie"], reverse=es_descendente)
+        criterio = "Superficie"
+    elif opcion == '4':
+        lista_paises.sort(key=lambda x: x["continente"], reverse=es_descendente)
+        criterio = "Continente"
+
+    print(f"\n¡Éxito! La lista de países ha sido ordenada por {criterio} de forma {'Descendente' if es_descendente else 'Ascendente'}.")
+
+    mostrar_lista_paises(lista_paises)
 
 def mostrar_estadisticas(lista_paises):
     pass
 
-
+def mostrar_lista_paises(lista_paises):
+    if not lista_paises:
+        print("\nNo hay países registrados para mostrar.")
+        return
+    
+    for p in range(len(lista_paises)):
+    # Formateamos con comas y reemplazamos por puntos
+        pob = f"{lista_paises[p]['poblacion']:,}".replace(',', '.')
+        sup = f"{lista_paises[p]['superficie']:,}".replace(',', '.')
+    
+        # Imprimimos usando las variables ya formateadas
+        print(f"{p+1}. {lista_paises[p]['nombre']} - Población: {pob} - Superficie: {sup} km² - Continente: {lista_paises[p]['continente']}")
 # ==========================================
 # PROGRAMA PRINCIPAL
 # ==========================================
@@ -137,10 +199,10 @@ datos = cargar_datos_csv(LISTA_PAISES)
 while True:
     mostrar_menu()
     try:
-        opcion = int(input("Ingrese una opción (1-7): "))
+        opcion = int(input("Ingrese una opción (1-8): "))
 
-        if opcion not in [1, 2, 3, 4, 5, 6, 7]:
-            print("Opción inválida. Por favor, ingrese un número entre 1 y 7.")
+        if opcion not in [1, 2, 3, 4, 5, 6, 7, 8]:
+            print("Opción inválida. Por favor, ingrese un número entre 1 y 8.")
         else:
             if opcion == 1:
                 agregar_pais(datos) 
@@ -155,6 +217,8 @@ while True:
             elif opcion == 6:
                 mostrar_estadisticas(datos)
             elif opcion == 7:
+                mostrar_lista_paises(datos)
+            elif opcion == 8:
                 print("\n¡Gracias por utilizar el sistema! Saliendo del programa...")
                 break  # Rompe el bucle while e interrumpe el programa limpiamente
                 
