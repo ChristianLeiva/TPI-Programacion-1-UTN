@@ -79,9 +79,3 @@ paises.csv: Dataset base de países.
 Documentacion_TPI.pdf: Informe académico completo.
 
 README.md: Este archivo.
-
-
-### Notas adicionales para tu entrega:
-* **Validaciones:** Asegúrate de que tu código maneje errores de formato en el CSV y entradas inválidas del usuario, tal como pide la consigna.
-* **Modularización:** Recuerda que cada función debe tener una sola responsabilidad (una función = una responsabilidad).
-* **Video:** Verifica que el enlace al video tenga permisos públicos antes de realizar la entrega final.
