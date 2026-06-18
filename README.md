@@ -13,8 +13,8 @@
 ---
 
 ## 📄 Documentación y Video
-* **Video Demostrativo:** [Insertar Link aquí] (Duración: 10-15 min)
-* **Informe Técnico (PDF):** [Enlace al PDF o ver archivo en la raíz]
+* **Video Demostrativo:** [[Insertar Link aquí](https://youtu.be/Wsbz3KPUoDM)]
+* **Informe Técnico (PDF):** [TPI_Programación_1_Sol_Chris.pdf]
 
 ---
 
