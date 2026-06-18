@@ -13,8 +13,8 @@
 ---
 
 ## 📄 Documentación y Video
-* **Video Demostrativo:** [[Insertar Link aquí](https://youtu.be/Wsbz3KPUoDM)]
-* **Informe Técnico (PDF):** [TPI_Programación_1_Sol_Chris.pdf]
+* **Video Demostrativo:** [[Link al video](https://youtu.be/Wsbz3KPUoDM)]
+* **Informe Técnico (PDF):** [Descargar Informe PDF](TPI_Programación_1_Sol_Chris.pdf)
 
 ---
 
